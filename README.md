@@ -112,9 +112,8 @@ node server.js
 ```
 📦 프로젝트 루트
 ├── server.js          # 메인 서버 (Express + Socket.io)
-├── .env               # 환경 변수 (git에 포함하지 않음)
-├── .gitignore
-├── package.json
+└── sockets/
+|   └── randomChatHandler.js
 └── public/            # 정적 파일 (HTML, CSS, JS)
     ├── index.html
     ├── style.css
