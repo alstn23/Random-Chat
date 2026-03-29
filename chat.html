@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>1:1 채팅방</title>
+<link rel="icon" href="/beemilk.ico" type="image/x-icon">
+<link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="chat-room.css">
+<script src="particle.js" defer></script>
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <button id="exitChatBtn" class="back-btn">종료</button>
+            <button id="blockBtn" class="block-btn hidden">차단하기</button>
+            <button id="addFriendBtn" class="add-friend-btn hidden">친구추가</button>
+        </header>
+        
+        <main class="chat-box">
+        </main>
+        <div id="typingIndicator" class="typing-indicator hidden">상대방이 입력 중입니다...</div>
+        <footer class="chat-input-area">
+            <div class="attach-wrapper">
+                <button id="attachBtn" class="attach-btn">+</button>
+                <div id="attachMenu" class="attach-menu hidden">
+                    <button id="imgUploadBtn">이미지 첨부하기</button>
+                </div>
+            </div>
+            <input type="file" id="imageInput" accept="image/*" class="hidden">
+            <input type="text" id="messageInput" maxlength="30">
+            <button id="sendBtn">전송</button>
+        </footer>
+
+        <div id="loadingScreen" class="loading-screen hidden">
+            <div class="spinner"></div>
+            <p>상대방을 찾는 중...</p>
+            <button id="cancelMatchBtn" class="cancel-match-btn">매칭 취소</button>
+        </div>
+
+        <div id="imageConfirmModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>이미지 전송 확인</h3>
+                <img id="previewImage" src="" alt="미리보기" style="max-width: 100%; max-height: 200px; margin-bottom: 15px;">
+                <p style="color: #F8F9FA; margin-bottom: 15px;">이 이미지를 전송하시겠습니까?</p>
+                <div class="modal-btn-group">
+                    <button id="sendImageBtn" class="sys-btn btn-rematch">전송</button>
+                    <button id="cancelImageBtn" class="sys-btn btn-exit">취소</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="friendRequestModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>친구요청</h3>
+                <p style="color: #F8F9FA; margin-bottom: 15px;">상대방이 친구 요청을 보냈습니다.<br>수락하시겠습니까?</p>
+                <div class="modal-btn-group">
+                    <button id="acceptFriendBtn" class="sys-btn btn-rematch">수락</button>
+                    <button id="declineFriendBtn" class="sys-btn btn-exit">거절</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module">
+        import { uploadImageFromClient } from '/js/firebase-client.js';
+        window.uploadImageFromClient = uploadImageFromClient;
+    </script>
+    <script src="chat.js"></script>
+</body>
+</html>
